@@ -1,0 +1,23 @@
+* {
+  font-family: 'Kanit', sans-serif;
+}
+
+.bord {
+  border-bottom: 2px solid grey;
+
+}
+
+.input {
+  border: 1px solid black !important;
+}
+
+/* Hide the scrollbar while still allowing it to function in WebKit browsers */
+::-webkit-scrollbar {
+  width: 0px;
+  /* You can adjust the width as needed */
+}
+
+iframe {
+  height: 100vh;
+  width: 100%;
+}
