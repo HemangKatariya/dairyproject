@@ -17,7 +17,7 @@ import TodaySales from './TodaySales';
 export default function RouterContainer() {
     return (
         <BrowserRouter>
-            <Routes> {/* Wrap your routes in a <Routes> component */}
+            <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
                 <Route path='/Products' element={<Products />} />  v

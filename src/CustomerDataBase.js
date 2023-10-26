@@ -10,13 +10,11 @@ import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { boolean } from 'yup';
-// import { Context } from './LanguageProvider';
 
 
 export default function CustomerDataBase() {
     const [data, setData] = useState([]);
-    // const { lang, setLang } = useContext(Context)
-    // const { lang, setLang } = useContext(Context);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,11 +23,14 @@ export default function CustomerDataBase() {
     }, []);
 
     const handleEditItem = (value) => {
-        const editedData = data.find(item => item.UserId === value);
-        if (editedData) {
-            localStorage.setItem("editedData", JSON.stringify(editedData));
+        const shouldEdit = window.confirm("Are you sure you want to Edit this Customer's info?");
+        if (shouldEdit) {
+            const editedData = data.find(item => item.UserId === value);
+            if (editedData) {
+                localStorage.setItem("editedData", JSON.stringify(editedData));
+            }
+            localStorage.setItem('id', JSON.stringify(value))
         }
-        localStorage.setItem('id', JSON.stringify(value))
     };
 
     const handleDeleteItem = (index) => {

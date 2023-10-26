@@ -155,6 +155,7 @@ export default function Sales() {
         }
         return result;
     }
+
     const handleMilkSubmit = (rowData, rowIndex) => {
         const milkValue = selectedUserId[rowIndex];
         const countValue = countValues[rowIndex];
@@ -163,9 +164,10 @@ export default function Sales() {
             const milkInfo = milkInfoMap[milkValue];
             const totalPrice = milkValue * countValue;
 
-
             const currentDate = new Date();
-
+            const date = new Date();
+            const monthName = date.toLocaleString('default', { month: 'long' });
+            const currentYear = new Date().getFullYear();
 
             const customerInfo = {
                 Name: rowData[0],
@@ -176,18 +178,20 @@ export default function Sales() {
                 TotalCount: countValue,
                 TotalPrice: totalPrice,
                 time: currentDate.toDateString() + ' ' + currentDate.toLocaleTimeString(),
+                Month: monthName,
+                Year: currentYear
             };
-
-
 
             const salesdata = JSON.parse(localStorage.getItem('salesdata')) || [];
 
             let customerSales = salesdata.find(item => item.UserId === rowData[1]);
 
+
             if (!customerSales) {
                 customerSales = {
                     UserId: rowData[1],
                     Name: rowData[0],
+
                     Sales: [],
                 };
                 salesdata.push(customerSales);
@@ -196,10 +200,7 @@ export default function Sales() {
 
             localStorage.setItem('salesdata', JSON.stringify(salesdata));
 
-
             toast.success(`Total Price Of Milk Purchased: ${totalPrice} By ${rowData[0]}`);
-
-
 
             setSelectedUserId((prevSelectedUserId) => ({
                 ...prevSelectedUserId,

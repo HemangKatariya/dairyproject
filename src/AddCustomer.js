@@ -159,13 +159,13 @@ export default function AddCustomer() {
                                             <ErrorMessage name="deposit" component="div" className="text-danger" />
                                         </div>
                                     </div>
-                                    <div className='col-12 d-lg-flex d-md-flex'>
-                                        <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1">
+                                    <div className='col-12 d-lg-flex d-md-flex' >
+                                        <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1" style={{ display: 'none' }}>
                                             <Field type="password" name="password" placeholder="Password" className="form-control" />
 
                                             <ErrorMessage name="password" component="div" className="text-danger" />
                                         </div>
-                                        <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1">
+                                        <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1" style={{ display: 'none' }}>
                                             <Field type="password" name="cpassword" placeholder=" Confirm Password" className="form-control" />
                                             <ErrorMessage name="cpassword" component="div" className="text-danger" />
                                         </div>

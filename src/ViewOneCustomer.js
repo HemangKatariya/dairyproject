@@ -14,6 +14,7 @@ export default function ViewOneCustomer() {
     const [finaldata, setFinaldata] = useState([]);
     const [totalRow, setTotalRow] = useState(null);
     const { id } = useParams();
+    const [selectedMonth, setSelectedMonth] = useState('');
 
     useEffect(() => {
         const currentURL = window.location.href;
@@ -123,7 +124,7 @@ export default function ViewOneCustomer() {
             name: "TotalCount",
             label: <b>{"Total Count"}</b>,
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -131,13 +132,29 @@ export default function ViewOneCustomer() {
             name: "TotalPrice",
             label: <b>{"Total Price"}</b>,
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
         {
             name: "time",
             label: <b>{"Date & Time"}</b>,
+            options: {
+                filter: false,
+                sort: false,
+            }
+        },
+        {
+            name: "Month",
+            label: <b>{"Month"}</b>,
+            options: {
+                filter: true,
+                sort: false,
+            }
+        },
+        {
+            name: "Year",
+            label: <b>{"Year"}</b>,
             options: {
                 filter: true,
                 sort: false,
@@ -147,7 +164,7 @@ export default function ViewOneCustomer() {
             name: "ID",
             label: <b>{"Delete"}</b>,
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
                 customBodyRender: (value, tableMeta) => (
                     <button
@@ -159,6 +176,8 @@ export default function ViewOneCustomer() {
                 )
             }
         },
+
+
     ];
 
 
