@@ -22,6 +22,7 @@ function Navv() {
                             <NavDropdown.Item as={Link} to="/AddCustomer">Add Customar</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/WholesaleBill">Wholesale Bill</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/TodaySales">Today's Sales</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/Payment">Payment Status</NavDropdown.Item>
                         </NavDropdown>
                         {/* <NavDropdown.Item as={Link} >
                             <NavDropdown title="Change Language" id="collasible-nav-dropdown">

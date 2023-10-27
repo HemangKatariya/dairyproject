@@ -58,44 +58,61 @@ export default function ViewOneCustomer() {
     }, [finaldata]);
 
 
+    //     const handleDeleteItem = (ID) => {
+    //
+    //         console.log(finaldata)
+    //         console.log(data)
+    //         let Udata = data
+    //         let sales = []
+    //         for (let i = 0; i < Udata.length; i++) {
+    //             if (Udata[i].UserId === finaldata[0].UserId) {
+    //                 console.log(Udata[i])
+    //                 sales = Udata[i].Sales
+    //             }
+    //         }
+    //         let newSales = sales.filter(obj => obj.ID !== ID)
+    //         console.log(newSales)
+    //         for (let i = 0; i < Udata.length; i++) {
+    //             if (Udata[i].UserId === finaldata[0].UserId) {
+    //                 Udata[i].Sales = newSales
+    //             }
+    //         }
+    //
+    //         localStorage.setItem('salesdata', JSON.stringify(Udata))
+    //         setFinaldata(Udata)
+    //         getData()
+    //
+    //     };
     const handleDeleteItem = (ID) => {
-        // const updatedData = [...finaldata];
-        // updatedData.splice(rowIndex, 1);
-        // console.log(updatedData)
-        //  setFinaldata(updatedData);
-        // const updatedSalesData = data.map(item => {
-        //     if (item.UserId === ids) {
-        //         return { ...item, Sales: updatedData };
-        //     }
-        //     return item;
-        // });
-        // localStorage.setItem("salesdata", JSON.stringify(updatedSalesData));
-        console.log(finaldata)
-        console.log(data)
-        let Udata = data
-        let sales = []
-        for (let i = 0; i < Udata.length; i++) {
-            if (Udata[i].UserId === finaldata[0].UserId) {
-                console.log(Udata[i])
-                sales = Udata[i].Sales
-            }
-        }
-        let newSales = sales.filter(obj => obj.ID !== ID)
-        console.log(newSales)
-        for (let i = 0; i < Udata.length; i++) {
-            if (Udata[i].UserId === finaldata[0].UserId) {
-                Udata[i].Sales = newSales
-            }
-        }
+        const shouldDelete = window.confirm("Are you sure you want to delete this item?");
 
-        localStorage.setItem('salesdata', JSON.stringify(Udata))
-        setFinaldata(Udata)
-        getData()
+        if (shouldDelete) {
+            let Udata = data;
+            let sales = [];
 
+            for (let i = 0; i < Udata.length; i++) {
+                if (Udata[i].UserId === finaldata[0].UserId) {
+                    sales = Udata[i].Sales;
+                }
+            }
+
+            let newSales = sales.filter(obj => obj.ID !== ID);
+
+            for (let i = 0; i < Udata.length; i++) {
+                if (Udata[i].UserId === finaldata[0].UserId) {
+                    Udata[i].Sales = newSales;
+                }
+            }
+
+            localStorage.setItem('salesdata', JSON.stringify(Udata));
+            setFinaldata(Udata);
+            getData();
+        }
     };
 
+
     const options = {
-        filterType: 'checkbox',
+        // filterType: 'checkbox',
     };
 
     const muiCache = createCache({

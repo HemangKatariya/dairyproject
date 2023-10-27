@@ -13,6 +13,7 @@ import WholesaleBill from './WholesaleBill';
 import ViewOneCustomer from './ViewOneCustomer';
 import Bill from './Bill';
 import TodaySales from './TodaySales';
+import Payment from './Payment';
 
 export default function RouterContainer() {
     return (
@@ -32,7 +33,7 @@ export default function RouterContainer() {
                 <Route path='/customer/:id' element={<ViewOneCustomer />} />
                 <Route path='/Bill' element={<Bill />} />
                 <Route path='/TodaySales' element={<TodaySales />} />
-
+                <Route path='/Payment' element={<Payment />} />
 
             </Routes>
         </BrowserRouter>

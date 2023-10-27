@@ -74,26 +74,6 @@ export default function Bill() {
         filterType: 'checkbox',
     };
 
-    const shareViaWhatsApp = () => {
-        if (navigator.share) {
-            const formattedBill = generateFormattedBill();
-            navigator.share({
-                text: formattedBill,
-            }).then(() => {
-                console.log('Shared successfully');
-            }).catch((error) => {
-                console.error('Error sharing:', error);
-            });
-        } else {
-
-            const whatsappMessage = generateFormattedBill();
-            const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-    };
-
-
-
     const generateFormattedBill = () => {
         if (!billData || !billData.customer || !billData.customer.milkRows) {
             return 'No bill data available.';
@@ -116,6 +96,26 @@ export default function Bill() {
 
         return formattedBill;
     };
+
+    const shareViaWhatsApp = () => {
+        if (navigator.share) {
+            const formattedBill = generateFormattedBill();
+            navigator.share({
+                text: formattedBill,
+            }).then(() => {
+                console.log('Shared successfully');
+            }).catch((error) => {
+                console.error('Error sharing:', error);
+            });
+        } else {
+
+            const whatsappMessage = generateFormattedBill();
+            const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    };
+
+
     const shareViaMessages = () => {
         const formattedBill = generateFormattedBill();
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -128,6 +128,108 @@ export default function Bill() {
             alert('Sorry, messaging is not supported on this device.');
         }
     };
+
+    const PrintBill = () => {
+        if (!billData || !billData.customer || !billData.customer.milkRows) {
+            return;
+        }
+
+        const { customer } = billData;
+        const milkRows = billData.customer.milkRows;
+        const totals = calculateTotals();
+
+        // Build the bill string
+        let formattedBill = `
+    <div id="bill-container">
+        <h3>BAPA SITARAM DAIRY</h3>
+        <h5>Date: ${customer.date}</h5>
+        <h5>Merchant Name: ${customer.name}</h5>
+    `;
+
+        milkRows.forEach(row => {
+            const totalPrice = row.price * row.count;
+            formattedBill += `
+        <div class="bill-row">
+            <span>${row.name}</span>
+            <span> ${row.price} X ${row.count}  = ${totalPrice}</span>
+        </div>
+    `;
+        });
+
+        formattedBill += `
+        <hr />
+        <div class="bill-row">
+            <span>Total:</span>
+            <span class="right-align">${totals.totalPrice}</span>
+        </div>
+        <div class="bill-row">
+            <span>Total Comission:</span>
+            <span class="right-align">${totals.totalTradeDiscount.toFixed(2)}</span>
+        </div>
+        <hr />
+        <h4 class="right-align"><strong>Grand Total: ${totals.grandTotal}</strong></h4>
+    </div>
+`;
+
+        // Add the "Thanks" note
+        formattedBill += `
+    <div id="thanks-note">
+        <p>Thanks for your business! We appreciate your patronage.</p>
+    </div>
+    `;
+
+        // Create a new window to print the bill
+        const billWindow = window.open('', '', 'width=auto,height=100%');
+        billWindow.document.open();
+
+        // Add a print stylesheet to control the layout for printing
+        billWindow.document.write(`
+    <html>
+        <head>
+            <style>
+                @media print {
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;
+                        page-break-before: always;
+                    }
+                    #bill-container {
+                        text-align: left;
+                        margin: 0 auto;
+                        max-width: 400px;
+                    }
+                    .bill-row {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    .right-align {
+                        text-align: right;
+                    }
+                    h3 {
+                        text-align: center;
+                    }
+                    hr {
+                        border: 1px solid #000;
+                    }
+                    h4.right-align {
+                        text-align: right;
+                    }
+                    #thanks-note {
+                        text-align: center;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            ${formattedBill}
+        </body>
+    </html>
+`);
+
+        billWindow.document.close();
+        billWindow.print();
+        billWindow.close();
+    }
 
 
 
@@ -206,6 +308,7 @@ export default function Bill() {
                     <ButtonGroup className='m-5'>
                         <Button variant='outline-success' onClick={shareViaWhatsApp}>Share via WhatsApp</Button>
                         <Button variant='outline-danger' onClick={shareViaMessages}>Send via Messages</Button>
+                        <Button variant='outline-info' onClick={PrintBill}>Print Bill</Button>
                     </ButtonGroup>
                 </>
             )

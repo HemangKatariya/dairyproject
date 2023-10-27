@@ -97,7 +97,6 @@ export default function Login() {
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
-
                             <i onClick={togglePasswordVisibility}>{eye} </i>
                         </div>
                         <h6>Don't Have An Account? <b>SignUp From Below!</b></h6>
