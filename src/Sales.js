@@ -53,7 +53,7 @@ export default function Sales() {
                 filter: true,
                 sort: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
-                    <select
+                    <select style={{ height: '30px', width: 'auto', borderRadius: '10px', border: '1px solid gray' }}
                         value={selectedUserId[tableMeta.rowIndex] || ''}
                         onChange={(event) =>
                             setSelectedUserId((prevSelectedUserId) => ({

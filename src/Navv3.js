@@ -16,7 +16,7 @@ function Navv3() {
 
         if (confirmLogout) {
             toast.warn('Logging Out...');
-            await new Promise(resolve => setTimeout(resolve, 3650));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             localStorage.removeItem('loggedInUser')
             navigate('/login');
         }

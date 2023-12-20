@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import Navv2 from './Navv2';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
@@ -7,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { ToastContainer } from 'react-toastify';
+import './App.css'
 
 function generateRandomAlphanumericPassword(length) {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -141,32 +141,32 @@ export default function AddCustomer() {
                                 <Form>
                                     <div className='col-12 d-lg-flex d-md-flex'>
                                         <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1">
-                                            <Field name="name" placeholder="Name" className="form-control" />
+                                            <Field name="name" placeholder="Name" className="form-control fld" />
                                             <ErrorMessage name='name' component='div' className='text-danger' />
                                         </div>
                                         <div className='mb-3 col-lg-6 col-md-6 col-sm-12 m-1'>
-                                            <Field name="address" placeholder="Address" className="form-control" />
+                                            <Field name="address" placeholder="Address" className="form-control fld" />
                                             <ErrorMessage name="address" component="div" className="text-danger" />
                                         </div>
                                     </div>
                                     <div className='col-12 d-lg-flex d-md-flex'>
                                         <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1">
-                                            <Field type="tel" name="phone" placeholder="Phone Number" className="form-control" />
+                                            <Field type="tel" name="phone" placeholder="Phone Number" className="form-control fld" />
                                             <ErrorMessage name="phone" component="div" className="text-danger" />
                                         </div>
                                         <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1">
-                                            <Field type="number" name="deposit" placeholder="Deposit" className="form-control" />
+                                            <Field type="number" name="deposit" placeholder="Deposit" className="form-control fld" />
                                             <ErrorMessage name="deposit" component="div" className="text-danger" />
                                         </div>
                                     </div>
                                     <div className='col-12 d-lg-flex d-md-flex' >
                                         <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1" style={{ display: 'none' }}>
-                                            <Field type="password" name="password" placeholder="Password" className="form-control" />
+                                            <Field type="password" name="password" placeholder="Password" className="form-control fld" />
 
                                             <ErrorMessage name="password" component="div" className="text-danger" />
                                         </div>
                                         <div className="mb-3 col-lg-6 col-md-6 col-sm-12 m-1" style={{ display: 'none' }}>
-                                            <Field type="password" name="cpassword" placeholder=" Confirm Password" className="form-control" />
+                                            <Field type="password" name="cpassword" placeholder=" Confirm Password" className="form-control fld" />
                                             <ErrorMessage name="cpassword" component="div" className="text-danger" />
                                         </div>
                                     </div>

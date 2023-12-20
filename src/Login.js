@@ -50,7 +50,7 @@ export default function Login() {
 
             setuserid('');
             setPassword('');
-            await new Promise(resolve => setTimeout(resolve, 3650));
+            await new Promise(resolve => setTimeout(resolve, 0));
 
             navigate('/ViewMySelf');
         } else {

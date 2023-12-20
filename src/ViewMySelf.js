@@ -8,6 +8,11 @@ import createCache from "@emotion/cache";
 import Footer2 from './Footer2';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useNavigate } from 'react-router-dom';
+// import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 let x = []
 let dummy = ""
@@ -18,9 +23,11 @@ export default function ViewMySelf() {
     const [data, setdata] = useState([]);
     const [totalRow, setTotalRow] = useState(null);
     const [sessionExpired, setSessionExpired] = useState(false);
-    const [selectedMonth, setSelectedMonth] = useState('');
+    const [selectedMonth,     setSelectedMonth] = useState('');
     const [currentMonth, setCurrentMonth] = useState('');
     const [currentYear, setCurrentYear] = useState('');
+    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -31,62 +38,63 @@ export default function ViewMySelf() {
             const salesData = JSON.parse(localStorage.getItem('salesdata')) || [];
             const filteredData = salesData.filter(item => item.userId === loggedInUser.UserId);
             setFilteredSalesData(filteredData);
-        }
 
-        const alldata = JSON.parse(localStorage.getItem('newData'));
+            const alldata = JSON.parse(localStorage.getItem('newData'));
 
-        if (alldata) {
-            const userEntry = alldata.find(entry => entry.UserId === loggedInUser.UserId);
+            if (alldata) {
+                const userEntry = alldata.find(entry => entry.UserId === loggedInUser.UserId);
 
-            if (userEntry) {
-                console.log('Password:', userEntry.password);
-                console.log('Phone Number:', userEntry.phone);
-                console.log('Deposit:', userEntry.deposit);
+                if (userEntry) {
+                    console.log('Password:', userEntry.password);
+                    console.log('Phone Number:', userEntry.phone);
+                    console.log('Deposit:', userEntry.deposit);
 
-                setCustomerData({
-                    ...customerData,
-                    address: userEntry.address,
-                    name: userEntry.name,
-                    UserId: userEntry.UserId,
-                    phone: userEntry.phone,
-                    password: userEntry.password,
-                    deposit: userEntry.deposit
-                });
+                    setCustomerData({
+                        ...customerData,
+                        address: userEntry.address,
+                        name: userEntry.name,
+                        UserId: userEntry.UserId,
+                        phone: userEntry.phone,
+                        password: userEntry.password,
+                        deposit: userEntry.deposit
+                    });
+                }
             }
-        }
 
-        const customer = JSON.parse(localStorage.getItem('salesdata'))
+            const customer = JSON.parse(localStorage.getItem('salesdata'))
 
 
-        for (let i = 0; i < customer.length; i++) {
-            x.push(customer[i].UserId)
-            for (let j = 0; j < x.length; j++) {
-                if (x[i] == loggedInUser.UserId) {
-                    // console.table(loggedInUser.UserId, x[i])
-                    dummy = loggedInUser.UserId
+            for (let i = 0; i < customer.length; i++) {
+                x.push(customer[i].UserId)
+                for (let j = 0; j < x.length; j++) {
+                    if (x[i] == loggedInUser.UserId) {
+                        // console.table(loggedInUser.UserId, x[i])
+                        dummy = loggedInUser.UserId
+                    }
+
+                }
+            }
+
+            for (let i = 0; i < customer.length; i++) {
+                if (customer[i].UserId == loggedInUser.UserId) {
+                    // console.table(customer[i].Sales)
+                    setdata(customer[i].Sales)
                 }
 
             }
+
+            setCurrentMonth(new Date().getMonth());
+            setCurrentYear(new Date().getFullYear());
+
+
+
+
+        } else {
+            navigate('/Login')
+            toast('Please Login Using your userID and Password ');
         }
 
-        for (let i = 0; i < customer.length; i++) {
-            if (customer[i].UserId == loggedInUser.UserId) {
-                // console.table(customer[i].Sales)
-                setdata(customer[i].Sales)
-            }
 
-        }
-
-        setCurrentMonth(new Date().getMonth());
-        setCurrentYear(new Date().getFullYear());
-
-        window.onpopstate = () => {
-            const confirmed = window.confirm("Are you sure you want to go back? Going back will log you out, and your session will expire.");
-            if (confirmed) {
-                localStorage.removeItem('loggedInUser');
-                setSessionExpired(true);
-            }
-        };
     }, []);
 
     useEffect(() => {
@@ -261,6 +269,7 @@ export default function ViewMySelf() {
                 </div>
             </div>
             <Footer2 />
+            <ToastContainer />
         </>
     );
 }

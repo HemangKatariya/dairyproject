@@ -40,7 +40,7 @@ export default function WholesaleBill() {
                     .required('Total milk count is required'),
                 TradeDiscount: Yup.number()
                     .typeError('Trade discount on crate must be a number')
-                    .positive('Trade discount on crate must be positive')
+                    .moreThan(-1, 'Trade discount on crate must be a non-negative number')
                     .required('Trade discount on crate is required'),
             })
         )
@@ -74,20 +74,22 @@ export default function WholesaleBill() {
 
 
     const milkOptions = {
-        '33': { name: 'Amul Gold', crateMeasurement: 24 },
-        '30': { name: 'Amul Shakti', crateMeasurement: 24 },
-        '26': { name: 'Amul Taaza', crateMeasurement: 24 },
-        '27': { name: 'Amul Tea Top', crateMeasurement: 24 },
-        '27': { name: 'Sumul Cow Milk', crateMeasurement: 24 },
-        '23': { name: 'Amul Slim N Trim', crateMeasurement: 24 },
-        '13': { name: 'Amul Taaza 250ml', crateMeasurement: 48 },
-        '186': { name: 'Sumul 6Ltr. Buttermilk', crateMeasurement: 2 },
-        '22': { name: 'Amul Masti Dahi', crateMeasurement: 24 },
-        '350': { name: 'Sumul 5kg DAhi', crateMeasurement: 2 },
-        '72': { name: 'Sumul 1kg Dahi', crateMeasurement: 10 },
-        '20': { name: 'Sumul 200gm Dahi Cup', crateMeasurement: 24 },
-        '15': { name: 'Sumul Dahi 200gm Pouch', crateMeasurement: 50 },
-        '16': { name: 'Sumul Chhash', crateMeasurement: 24 },
+        '33': { name: 'અમૂલ ગોલ્ડ ', crateMeasurement: 24 },
+        '30': { name: 'અમૂલ શક્તિ ', crateMeasurement: 24 },
+        '26': { name: 'અમૂલ તાજા ', crateMeasurement: 24 },
+        '27': { name: 'અમૂલ ટી ટોપ ', crateMeasurement: 24 },
+        '27': { name: 'સુમુલ  ગાય નું દૂધ ', crateMeasurement: 24 },
+        '23': { name: 'અમૂલ સ્લીમ એન ટ્રીમ ', crateMeasurement: 24 },
+        '13': { name: 'અમૂલ તાજા  250ml', crateMeasurement: 48 },
+        '186': { name: 'સુમુલ છાશ 6 લિટર  ', crateMeasurement: 2 },
+        '22': { name: 'અમૂલ મસ્તી દહી ', crateMeasurement: 24 },
+        '350': { name: 'સુમુલ 5 કિલો  દહી ', crateMeasurement: 2 },
+        '72': { name: 'સુમુલ 1 કિલો  દહી', crateMeasurement: 10 },
+        '20': { name: 'સુમુલ 200ગ્રામ દહી કપ  ', crateMeasurement: 24 },
+        '15': { name: 'સુમુલ દહી 200ગ્રામ  પાઉચ ', crateMeasurement: 50 },
+        '16': { name: 'સુમુલ છાશ ', crateMeasurement: 24 },
+        '384': { name: 'અમૂલ ગોલ્ડ 6 લિટર  ', crateMeasurement: 2 },
+        '1 ': { name: 'અન્ય  ', crateMeasurement: 1 },
     };
 
 
